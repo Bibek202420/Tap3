@@ -1,0 +1,20 @@
+use TAP3::Tap3edit;
+ 
+ 
+$tap3 = TAP3::Tap3edit->new;
+$tap3->decode("NRNZLTMSGPST0181165")  or  die $tap3->error; 
+ 
+$struct=$tap3->structure;
+# $struct is a hash which can be now changed to modify the TAP file structure.
+ 
+# After modifying the hash, it can be written into a new file
+$tap3->encode("NRNZLTMSGPST0181165.new")  or  die $tap3->error;
+ 
+ 
+$tap3 = TAP3::Tap3edit->new;
+$tap3->get_info("NRNZLTMSGPST0181165");
+ 
+$version=$tap3->version;
+$release=$tap3->release;
+ 
+$taptype=$tap3->file_type;
